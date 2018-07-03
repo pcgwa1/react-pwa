@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import fire from '../firebaseConfig';
 class Login extends PureComponent {
   constructor(props) {
@@ -15,18 +16,24 @@ class Login extends PureComponent {
   login(e){
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((u) => {
-        console.log('promise response', u.user.uid)
+        console.log('promise response', u.user.uid);
+        if(u.user.uid) {
+          console.log('push history', this.props);
+          this.props.history.push('/');
+        }
       })
       .catch((error) => {
         console.log('error: ', error);
       })
-
   }
 
   signUp(e){
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((u) => {
         console.log('promise response', u.user.uid)
+        if(u.user.uid) {
+          this.props.history.push('/');
+        }
       })
       .catch((error) => {
         console.log('error: ', error);
@@ -48,6 +55,7 @@ class Login extends PureComponent {
             <button type='button' onClick={this.login}>Login</button>
             <button type='button' onClick={this.signUp}>Sign up</button>
           </div>
+          <Link to='/reset'>Reset Password</Link>
         </form>
     );
   }
