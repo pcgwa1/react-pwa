@@ -67,10 +67,10 @@ class App extends Component {
           {!!user ? <Menu authenticated={!!user} /> : null}
           <Route exact path='/login' component={Login}/>
           <Route exact path='/reset' component={ResetPassword}/>
-          <PrivateRoute exact path='/' component={Home} authenticated={!!user}/>
-          <PrivateRoute exact path='/about' component={About} authenticated={!!user}/>
-          <PrivateRoute exact path='/settings' component={Settings} authenticated={!!user}/>
-          <PrivateRoute exact path='/events' component={Events} authenticated={!!user}/>
+          <PrivateRoute exact path='/' component={Home} authenticated={!!user} user={user}/>
+          <PrivateRoute exact path='/about' component={About} authenticated={!!user} user={user}/>
+          <PrivateRoute exact path='/settings' component={Settings} authenticated={!!user} user={user}/>
+          <PrivateRoute exact path='/events' component={Events} authenticated={!!user} user={user}/>
         </div>
       </Router>
     );

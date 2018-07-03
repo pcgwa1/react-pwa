@@ -14,7 +14,7 @@ class ResetPassword extends PureComponent {
   reset(e){
     fire.auth().sendPasswordResetEmail(this.state.email)
       .then((response) => {
-        console.log('promise response', response);
+        console.log('success!!!!', response);
       })
       .catch((error) => {
         console.log('error: ', error);
