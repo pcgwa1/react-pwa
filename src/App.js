@@ -30,7 +30,7 @@ class App extends Component {
           <div className="App">
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
-              <h2>PWA</h2>
+              <h2>React PWA</h2>
             </div>
           <Menu />
           <PrivateRoute exact path="/" component={Home} authenticated={true}/>
