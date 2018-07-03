@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PrivateRoute from './PrivateRoutes';
 import Home from './Containers/home';
-import LogIn from './Containers/LogIn';
 import About from './Containers/about';
 import Settings from './Containers/settings';
 import logo from './logo.svg';
