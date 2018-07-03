@@ -52,6 +52,8 @@ class App extends Component {
   }
   render(){
     const { user } = this.state;
+    console.log('App routes');
+    console.log('authenticated', !!user);
     return (
       <Router>
         <div>
