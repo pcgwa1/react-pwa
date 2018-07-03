@@ -1,41 +1,70 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PrivateRoute from './PrivateRoutes';
+import Login from './Containers/login';
 import Home from './Containers/home';
 import About from './Containers/about';
 import Settings from './Containers/settings';
 import logo from './logo.svg';
 import './App.css';
-import './firebaseConfig';
+import fire from './firebaseConfig';
 
-const Menu = () => (
+function logout() {
+  fire.auth().signOut();
+}
+const Menu = (props) => (
   <div>
     <p>
-      <Link to="/">Home</Link>
+      <Link to='/home'>Home</Link>
     </p>
     <p>
-      <Link to="/about">About</Link>
+      <Link to='/about'>About</Link>
     </p>
     <p>
-      <Link to="/settings">Settings</Link>
+      <Link to='/settings'>Settings</Link>
     </p>
+    {props.authenticated ? <button type='button' onClick={() => logout()}> Logout</button> : null}
   </div>
 );
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+    };
+    this.authListener = this.authListener.bind(this);
+  }
+
+  authListener(){
+    fire.auth().onAuthStateChanged((user) => {
+      if(user){
+        this.setState({user: user.uid});
+      } else {
+        this.setState({user: null});
+      }
+    })
+
+  }
+
+  componentWillMount(){
+    this.authListener();
+  }
   render(){
+    const { user } = this.state;
     return (
       <Router>
         <div>
-          <div className="App">
-            <div className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
+          <div className='App'>
+            <div className='App-header'>
+              <img src={logo} className='App-logo' alt='logo' />
               <h2>React PWA</h2>
             </div>
-          <Menu />
-          <PrivateRoute exact path="/" component={Home} authenticated={true}/>
-          <Route exact path="/login" component={About}/>
-          <Route exact path="/settings" component={Settings}/>
+            {!!user ? <Menu authenticated={!!user} /> : null}
+          <Route exact path='/login' component={Login}/>
+          <PrivateRoute exact path='/' component={Home} authenticated={!!user}/>
+          <PrivateRoute exact path='/about' component={About} authenticated={!!user}/>
+          <PrivateRoute exact path='/settings' component={Settings} authenticated={!!user}/>
           </div>
         </div>
       </Router>
