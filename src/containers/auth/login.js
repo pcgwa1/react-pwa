@@ -10,10 +10,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
+  border: 5px solid green;
   
   a {
     margin: 12px 0;
@@ -35,7 +36,7 @@ class Login extends Component {
   login(e){
     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((u) => {
-        console.log('promise response', u.user.uid);
+        console.log('promise response success', u.user.uid);
         if(u.user.uid) {
           this.setState({user: u.user.uid});
         }
