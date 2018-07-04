@@ -85,7 +85,7 @@ class Events extends Component {
             <Grid container spacing={24}>
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                  <TextFields name='event' label='Enter an event name or suggestion' type='text' onChangeHandler={this.handleChange} value={this.state.email} />
+                  <TextFields name='event' label='Enter name or suggestion' type='text' onChangeHandler={this.handleChange} value={this.state.email} />
                   <FlatButton name='Save Name' type='button' handleClick={this.submitData} />
                   <FlatButton name='Save Suggestion' type='button' handleClick={this.handleSubmit} />
                 </Paper>
