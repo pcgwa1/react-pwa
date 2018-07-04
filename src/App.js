@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoutes';
-import './App.css';
 import fire from './firebaseConfig';
 
 import asyncComponent from './components/AsyncComponent';
@@ -40,7 +39,7 @@ class App extends Component {
     const { user } = this.state;
     return (
       <Router>
-        <div className='App'>
+        <div>
           <AppBar user={user}/>
           <Route exact path='/login' component={Login}/>
           <Route exact path='/signup' component={SignUp}/>
