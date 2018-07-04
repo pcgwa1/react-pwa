@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoutes';
-import Login from './Containers/auth/login';
-import SignUp from './Containers/auth/signUp';
-import ResetPassword from './Containers/resetPassword';
-import AppBar from './Containers/appBar';
-import Home from './Containers/home';
-import About from './Containers/about';
-import Events from './Containers/Events';
 import './App.css';
 import fire from './firebaseConfig';
+
+import asyncComponent from './components/AsyncComponent';
+export const Home = asyncComponent(() => import('./containers/home'));
+export const Login = asyncComponent(() => import('./containers/auth/login'));
+export const SignUp = asyncComponent(() => import('./containers/auth/signUp'));
+export const ResetPassword = asyncComponent(() => import('./containers/resetPassword'));
+export const AppBar = asyncComponent(() => import('./containers/appBar'));
+export const About = asyncComponent(() => import('./containers/about'));
+export const Events = asyncComponent(() => import('./containers/Events'));
 
 class App extends Component {
   constructor(props) {
