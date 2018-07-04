@@ -1,36 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoutes';
-import Login from './Containers/login';
+import Login from './Containers/auth/login';
+import SignUp from './Containers/auth/signUp';
 import ResetPassword from './Containers/resetPassword';
+import AppBar from './Containers/appBar';
 import Home from './Containers/home';
 import About from './Containers/about';
-import Settings from './Containers/settings';
-import Events from './Containers/addEvent';
-import logo from './logo.svg';
+import Events from './Containers/Events';
 import './App.css';
 import fire from './firebaseConfig';
-
-function logout() {
-  fire.auth().signOut();
-}
-const Menu = (props) => (
-  <div>
-    <p>
-      <Link to='/'>Home</Link>
-    </p>
-    <p>
-      <Link to='/about'>About</Link>
-    </p>
-    <p>
-      <Link to='/settings'>Settings</Link>
-    </p>
-    <p>
-      <Link to='/events'>Events</Link>
-    </p>
-    {props.authenticated ? <button type='button' onClick={() => logout()}> Logout</button> : null}
-  </div>
-);
 
 class App extends Component {
   constructor(props) {
@@ -60,16 +39,12 @@ class App extends Component {
     return (
       <Router>
         <div className='App'>
-          <div className='App-header'>
-            <img src={logo} className='App-logo' alt='logo' />
-            <h2>React PWA</h2>
-          </div>
-          {!!user ? <Menu authenticated={!!user} /> : null}
+          <AppBar user={user}/>
           <Route exact path='/login' component={Login}/>
+          <Route exact path='/signup' component={SignUp}/>
           <Route exact path='/reset' component={ResetPassword}/>
           <PrivateRoute exact path='/' component={Home} authenticated={!!user} user={user}/>
           <PrivateRoute exact path='/about' component={About} authenticated={!!user} user={user}/>
-          <PrivateRoute exact path='/settings' component={Settings} authenticated={!!user} user={user}/>
           <PrivateRoute exact path='/events' component={Events} authenticated={!!user} user={user}/>
         </div>
       </Router>
