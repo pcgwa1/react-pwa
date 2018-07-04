@@ -35,15 +35,20 @@ class Login extends PureComponent {
   signUp(e){
     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((u) => {
-        console.log('promise response', u.user.uid)
         if(u.user.uid) {
-          this.props.history.push('/');
+          this.setState({user: u.user.uid});
         }
       })
       .catch((error) => {
         console.log('error: ', error);
       })
 
+  }
+
+  componentWillUpdate(){
+    if(this.state.user){
+      this.props.history.push('/');
+    }
   }
 
   handleChange(e){
