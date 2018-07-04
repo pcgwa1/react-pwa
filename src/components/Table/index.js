@@ -18,7 +18,7 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    minWidth: 0,
   },
   icon: {
     margin: theme.spacing.unit,
