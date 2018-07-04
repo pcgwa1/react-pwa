@@ -71,7 +71,7 @@ class Events extends Component {
 
     db.collection("suggestions")
       .orderBy("name")
-      .onSnapshot((collection) => {
+      .onSnapshot({ includeMetadataChanges: true }, (collection) => {
         const suggestions = collection.docs.map(doc => doc.data());
         this.setState({suggestions});
       });
