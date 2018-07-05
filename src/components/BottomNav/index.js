@@ -33,10 +33,26 @@ export const ButtonLink = styled(Link)`
   justify-content: center;
   flex-direction: column;
   padding: 0;
-  margin: 0 1vw;
+  margin: 0;
   text-decoration: none;
   color: #333;
   cursor: pointer;
+`;
+
+export const NavBar = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  position: fixed;
+  padding: 0 10px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  background-color: #EDE7F6;
+  color: white;
+  text-align: center;
 `;
 
 export const Button = styled.button`
@@ -45,7 +61,7 @@ export const Button = styled.button`
   justify-content: center;
   flex-direction: column;
   padding: 0;
-  margin: 0 1vw;
+  margin: 0;
   color: #333;
   cursor: pointer;
   border: none;
@@ -58,7 +74,7 @@ export const Button = styled.button`
 export const Label = styled.label`
   padding: 0;
   margin: 0;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   text-transform: uppercase;
@@ -69,23 +85,9 @@ function logout() {
 }
 
 class SimpleBottomNavigation extends Component {
-  state = {
-    value: 0,
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
     return (
-      <BottomNavigation
-        value={value}
-        onChange={this.handleChange}
-        className={classes.root}
-      >
+      <NavBar>
         <ButtonLink to='/logbook'>
           <Label>Logbook</Label>
         </ButtonLink>
@@ -93,7 +95,7 @@ class SimpleBottomNavigation extends Component {
           <Label>Dash</Label>
         </ButtonLink>
         <Button color='inherit' onClick={() => logout()}>Log Out</Button>
-      </BottomNavigation>
+      </NavBar>
     );
   }
 }
