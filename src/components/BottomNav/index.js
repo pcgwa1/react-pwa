@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
 import fire from "../../firebaseConfig";
 
 const styles = {
