@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
     <meta name="Description" content="My progressive web app">
     <!--<meta name="Cache-Control max-age=86400">-->
     <!--
@@ -24,9 +26,50 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Health App</title>
+    <style>
+      body {
+        background: #ffffff;
+        margin: 0;
+      }
+
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ReactModalPortal > .ReactModal__Overlay {
+        z-index: 9999;
+      }
+
+      .scaffold-nav {
+        width: 100%;
+        background: #fff;
+        height: 55px;
+        position: relative;
+        overflow-y: visible;
+        flex: 0 0 auto;
+      }
+
+      @media only screen and (min-width: 62em) {
+        .scaffold-nav {
+          height: 62px;
+        }
+      }
+
+      .scaffold-noscript {
+        color: white;
+        font: 900 1em Montserrat, Helvetica, sans-serif, system-ui;
+        text-align: center;
+        margin-top: 1em;
+        text-transform: uppercase;
+      }
+    </style>
+
   </head>
   <body>
-    <noscript>
+  <header class="scaffold-nav"/>
+    <noscript class="scaffold-noscript" >
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>

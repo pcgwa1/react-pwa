@@ -1,11 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import PageContainer from '../components/PageContainer';
 
-class Home extends PureComponent {
+class Home extends Component {
   render() {
     return (
-      <h1>
+      <PageContainer>
         Home
-      </h1>
+      </PageContainer>
     );
   }
 }

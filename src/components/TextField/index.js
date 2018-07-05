@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -14,6 +15,13 @@ const styles = theme => ({
     width: 250,
   },
 });
+
+export const TextInput = styled(TextField)`
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+`;
 
 const TextFieldMargins = props => {
   const { classes,
