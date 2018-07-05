@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PrivateRoute from './PrivateRoutes';
 import fire from './firebaseConfig';
+import BottomNav from './components/BottomNav';
+import Loader from './components/Loader';
+import { setUserData } from './actions';
 
 import asyncComponent from './components/AsyncComponent';
-export const Home = asyncComponent(() => import('./containers/home'));
-export const Login = asyncComponent(() => import('./containers/auth/login'));
+export const Landing = asyncComponent(() => import('./containers/Landing'));
 export const SignUp = asyncComponent(() => import('./containers/auth/signUp'));
 export const ResetPassword = asyncComponent(() => import('./containers/resetPassword'));
-export const AppBar = asyncComponent(() => import('./containers/appBar'));
-export const About = asyncComponent(() => import('./containers/about'));
+export const LogBook = asyncComponent(() => import('./containers/logBook'));
 export const Events = asyncComponent(() => import('./containers/Events'));
 
 class App extends Component {
@@ -21,36 +23,49 @@ class App extends Component {
     this.authListener = this.authListener.bind(this);
   }
 
-  authListener(){
+  authListener(setUserDataToState){
     fire.auth().onAuthStateChanged((user) => {
       if(user){
-        this.setState({user: user.uid});
+        setUserDataToState(user.uid);
       } else {
-        this.setState({user: null});
+        setUserDataToState(null);
       }
     })
 
   }
 
   componentWillMount(){
-    this.authListener();
+    const { setUserDataToState } = this.props;
+    this.authListener(setUserDataToState);
   }
   render(){
-    const { user } = this.state;
+    const { user } = this.props;
     return (
       <Router>
         <div>
-          <AppBar user={user}/>
-          <Route exact path='/login' component={Login}/>
+          <Loader user={user}/>
           <Route exact path='/signup' component={SignUp}/>
           <Route exact path='/reset' component={ResetPassword}/>
-          <PrivateRoute exact path='/' component={Home} authenticated={!!user} user={user}/>
-          <PrivateRoute exact path='/about' component={About} authenticated={!!user} user={user}/>
+          <Route exact path='/' component={Landing} />
           <PrivateRoute exact path='/events' component={Events} authenticated={!!user} user={user}/>
+          <PrivateRoute exact path='/logbook' component={LogBook} authenticated={!!user} user={user}/>
+          {!!user ? <BottomNav user={user} {...this.props} /> : null}
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+export function mapStateToProps(state) {
+  return {
+    user: state.main.user,
+  };
+}
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    setUserDataToState: data => dispatch(setUserData(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

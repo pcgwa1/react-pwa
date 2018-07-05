@@ -3,10 +3,11 @@ import { reducer as reduxFormReducer } from 'redux-form';
 
 import {
   DEFAULT,
+  SET_USER_DATA,
 } from './constants';
 
 const initialState = {
-  someValue: false,
+  user: null,
 };
 
 export function main(
@@ -16,6 +17,8 @@ export function main(
   switch (action.type) {
     case DEFAULT:
       return { ...state};
+    case SET_USER_DATA:
+      return { ...state, user: action.payload };
     default:
       return state;
   }

@@ -38,20 +38,18 @@ function logout() {
 }
 
 function ButtonAppBar(props) {
-  const { classes, user } = props;
+  const { classes, user, openDrawer } = props;
   return (
     <div className={classes.root}>
       <AppBar position='fixed'>
         <Toolbar>
           {!!user ?
-          <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
+          <IconButton onClick={() => openDrawer()} className={classes.menuButton} color='inherit' aria-label='Menu'>
             <MenuIcon />
           </IconButton> : null }
           <Typography variant='title' color='inherit' className={classes.flex}>
             PWA
           </Typography>
-          {!!user ? <Button color='inherit'><ButtonLink to='/events'>Events</ButtonLink></Button> : null}
-          {!!user ? <Button color='inherit'><ButtonLink to='/about'>About</ButtonLink></Button> : null}
           {!!user ? <Button color='inherit' onClick={() => logout()}>Log Out</Button> :
             <div>
               <Button color='inherit'><ButtonLink to='/signup'>Sign Up</ButtonLink></Button>
