@@ -9,11 +9,8 @@ import { setUserData } from './actions';
 
 import asyncComponent from './components/AsyncComponent';
 export const Landing = asyncComponent(() => import('./containers/Landing'));
-export const Home = asyncComponent(() => import('./containers/home'));
-export const Login = asyncComponent(() => import('./containers/auth/login'));
 export const SignUp = asyncComponent(() => import('./containers/auth/signUp'));
 export const ResetPassword = asyncComponent(() => import('./containers/resetPassword'));
-export const About = asyncComponent(() => import('./containers/about'));
 export const LogBook = asyncComponent(() => import('./containers/logBook'));
 export const Events = asyncComponent(() => import('./containers/Events'));
 
@@ -47,12 +44,9 @@ class App extends Component {
       <Router>
         <div>
           <Loader user={user}/>
-          <Route exact path='/login' component={Login}/>
           <Route exact path='/signup' component={SignUp}/>
           <Route exact path='/reset' component={ResetPassword}/>
           <Route exact path='/' component={Landing} />
-          <PrivateRoute exact path='/home' component={Home} authenticated={!!user} user={user}/>
-          <PrivateRoute exact path='/about' component={About} authenticated={!!user} user={user}/>
           <PrivateRoute exact path='/events' component={Events} authenticated={!!user} user={user}/>
           <PrivateRoute exact path='/logbook' component={LogBook} authenticated={!!user} user={user}/>
           {!!user ? <BottomNav user={user} {...this.props} /> : null}

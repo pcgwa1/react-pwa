@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography';
 import { db } from '../../firebaseConfig';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Table from '../../components/Table';
 import List from '../../components/List';
+import Drawer from './drawer';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: 1,
     textAlign: 'center',
     color: theme.palette.text.secondary,
+  },
+  title: {
+    fontSize: 38,
+    padding: 50,
+    color: theme.palette.text.secondary,
+    marginBottom: 10,
+    backgroundColor: '#ccc',
   },
 });
 
 export const Wrapper = styled.div`
   padding: 0;
-  margin: 16px 10%;
+    @media (min-width:600px)  {
+      margin: 16px 10%;
+    }
 `;
 
 class Events extends Component {
@@ -61,13 +71,6 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    db.doc('events/event-type')
-      .onSnapshot((doc) => {
-        if(doc.data()){
-          this.setState({ name: doc.data().name })
-        }
-      });
-
     db.collection("suggestions")
       .orderBy("name")
       .onSnapshot({ includeMetadataChanges: true }, (collection) => {
@@ -83,6 +86,10 @@ class Events extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
+                <Typography  variant="display2" className={classes.title} >
+                  Logbook
+                </Typography>
+                <Drawer/>
                 {this.state.suggestions && <List suggestions={this.state.suggestions} />}
               </Paper>
 

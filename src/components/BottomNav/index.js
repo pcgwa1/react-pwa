@@ -86,17 +86,11 @@ class SimpleBottomNavigation extends Component {
         onChange={this.handleChange}
         className={classes.root}
       >
-        <ButtonLink to='/events'>
+        <ButtonLink to='/logbook'>
           <Label>Logbook</Label>
         </ButtonLink>
-        <ButtonLink to='/favourites'>
-          <Label>Favorites</Label>
-        </ButtonLink>
-        <ButtonLink to='/reports'>
-          <Label>Reports</Label>
-        </ButtonLink>
-        <ButtonLink to='/settings'>
-          <Label>Settings</Label>
+        <ButtonLink to='/'>
+          <Label>Dash</Label>
         </ButtonLink>
         <Button color='inherit' onClick={() => logout()}>Log Out</Button>
       </BottomNavigation>

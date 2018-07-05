@@ -21,10 +21,18 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     fontSize: 32,
   },
+  listItem: {
+    '&:hover': {
+      backgroundColor: '#ccc',
+    },
+    '&:focus': {
+      backgroundColor: '#ccc',
+    },
+  }
 });
 export const Button = styled.button`
   padding: 0;
-  margin: 0 10%;
+  margin: 0 2.5%;
   background: none;
   outline: none;
   border: none;
